@@ -85,6 +85,13 @@ public class Main {
         
         graph2.bfs(vv2);
         
+        System.out.println("==============================");
+        System.out.println("   D F S ");
+        graph.clearVisits();
+        graph.dfs(v1);
+        
+        System.out.println("===================");
+        
         
         
         

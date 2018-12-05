@@ -28,5 +28,9 @@ public abstract class Graph<E extends Vertex<?>> {
     public int size() {
         return this.getNodes().size();
     }
+    
+    public abstract void bfs(E node);
+    
+    public abstract void dfs(E node);
 
 }

@@ -6,6 +6,7 @@
 package it.cnr.istc.pst.graph.linkedg;
 
 import it.cnr.istc.pst.graph.abstracts.Graph;
+import it.cnr.istc.pst.graph.abstracts.Vertex;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -54,23 +55,41 @@ public class LinkedGraph<T> extends Graph<LVertex<T>> {
 
     }
 
+    @Override
     public void bfs(LVertex<T> node) {
 
-        Queue<LVertex<T>> queue = new LinkedBlockingQueue<>();
+        Queue<LVertex> queue = new LinkedBlockingQueue<>();
         queue.offer(node);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             LVertex<T> head = queue.remove();
             System.out.println("[BFS] element = " + head.getElement());
-            
+
             head.setVisited(true);
             for (LVertex<T> a : head.getAdjacents()) {
-                if (!a.isVisited() && !a.isMarked() ) {
+                if (!a.isVisited() && !a.isMarked()) {
                     queue.offer(a);
                     a.setMarked(true);
                 }
             }
         }
+    }
+
+    /**
+     * supposing clearVisit is already called
+     *
+     * @param node
+     */
+    @Override
+    public void dfs(LVertex<T> node) {
+        System.out.println("Element = " + node.getElement());
+        node.setVisited(true);
+        for (LVertex<T> adjacent : node.getAdjacents()) {
+            if(!adjacent.isVisited()){
+                dfs(adjacent);
+            }
+        }
 
     }
+
 }
